@@ -15,7 +15,10 @@ export default function LoginPage() {
 
   async function handleSubmit() {
     if (!email || !password) return
-    if (!supabase) { setError('Connexion non configurée.'); return }
+    if (!supabase) {
+      setError('Auth non configurée. Contactez le support.')
+      return
+    }
     setLoading(true); setError(''); setSuccess('')
     if (mode === 'signup') {
       const { error: err } = await supabase.auth.signUp({ email, password })
@@ -29,7 +32,12 @@ export default function LoginPage() {
     setLoading(false)
   }
 
-  const inp = { width: '100%', background: 'transparent', border: 'none', borderBottom: '0.5px solid rgba(255,255,255,0.1)', outline: 'none', fontFamily: 'Inter, sans-serif', fontSize: 14, color: 'var(--tx)', padding: '8px 0', marginBottom: 16 } as React.CSSProperties
+  const inp = {
+    width: '100%', background: 'transparent', border: 'none',
+    borderBottom: '0.5px solid rgba(255,255,255,0.1)', outline: 'none',
+    fontFamily: 'Inter, sans-serif', fontSize: 14, color: 'var(--tx)',
+    padding: '8px 0', marginBottom: 16
+  } as React.CSSProperties
 
   return (
     <main style={{ minHeight: '100vh', background: 'var(--bg)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: 20 }}>
