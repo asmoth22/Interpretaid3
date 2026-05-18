@@ -15,6 +15,7 @@ export default function LoginPage() {
 
   async function handleSubmit() {
     if (!email || !password) return
+    if (!supabase) { setError('Connexion non configurée.'); return }
     setLoading(true); setError(''); setSuccess('')
     if (mode === 'signup') {
       const { error: err } = await supabase.auth.signUp({ email, password })
